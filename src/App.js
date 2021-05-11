@@ -4,10 +4,10 @@ import {signin,favorite} from "./pages"
 function App() {
   return (
     <BrowserRouter>
-    <Switch>
-      <Route path="/" exact component={signin} />
-      <Route path="/favorite" exact component={favorite} />
-    </Switch>
+      <Switch>
+        <Route path="/" exact component={signin} />
+        <Route path="/favorite" exact component={favorite} />
+      </Switch>
     </BrowserRouter>
   );
 
