@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {  useState } from 'react';
 import {Avatar,
         Button,
         CssBaseline,
@@ -11,6 +11,10 @@ import {Avatar,
     } from "@material-ui/core"
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import {useDispatch, useSelector } from 'react-redux';
+import {userLogin} from "../store/actions/users"
+
+import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,12 +51,38 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function SignIn() {
+ function SignIn() {
   const classes = useStyles();
+  const [userName,setUserName] =useState('')
+  const [password,setPassword] =useState('')
+  const history = useHistory();
+  const users=useSelector(state=>state.users.users)
+  
+  const dispatch=useDispatch()
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    for(let item of users){
+
+      if(item.email===userName && item.password==password)
+      {
+          dispatch(userLogin(true))
+          history.push("/favorite");
+      }
+      
+    }
+    
+  }
+  const handleChange=(e)=>{
+    if(e.target.name==="username" )
+        setUserName(e.target.value)
+    if(e.target.name==="password" )
+        setPassword(e.target.value)
+  }
 
   return (
      <div className={classes.root}>
-      
+       
+     
     <Container    component="main" maxWidth="xs" className={classes.container} >
         <CssBaseline />
       <div className={classes.paper}>
@@ -62,7 +92,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5" color="" >
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,9 +100,11 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name="username"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
+
             />
           <TextField
             variant="outlined"
@@ -84,6 +116,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
             />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -95,17 +128,22 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-           
+            
             
             >
             Sign In
+     
           </Button>
          
         </form>
       </div>
   
     </Container>
+     
     </div>
     
   );
 }
+
+
+export default SignIn
