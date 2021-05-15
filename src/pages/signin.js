@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
       if(item.email===userName && item.password==password)
       {
-          dispatch(userLogin(true))
+          dispatch(userLogin(item.email,true))
           history.push("/favorite");
       }
       

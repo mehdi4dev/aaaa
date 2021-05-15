@@ -7,7 +7,6 @@ import {CardActions,
         CardContent,
         Typography
     } from "@material-ui/core"
-import captian from '../images/1.jpg'
 
 const useStyles=makeStyles((theme)=>({
     card: {
@@ -24,33 +23,38 @@ const useStyles=makeStyles((theme)=>({
       }
 }))
 
-export default function Cards({props}){
+export default function ComicCard({hero}){
     const classes=useStyles()
+    const handleSubmit=()=>{
+
+    }
 return(  
-        <Card className={classes.card}>
+    <Card className={classes.card} onSubmit={handleSubmit}>
             <CardMedia
-            
             className={classes.cardMedia}
-            image={captian}
+            image={`${hero.images[0].path}.jpg`}
             
             title="Image title"
             />
             
             <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
-                Heading
+                {hero.title}
             </Typography>
             <Typography>
-                This is a media card. You can use this section to describe the content.
+                {hero.description}
             </Typography>
             </CardContent>
             <CardActions>
-            <Button size="small" color="primary">
+            <Button 
+            size="small" 
+            color="primary"
+            variant="contained"
+            
+            >
                 View
             </Button>
-            <Button size="small" color="primary">
-                Edit
-            </Button>
+            
             </CardActions>
         </Card>
 

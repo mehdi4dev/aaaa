@@ -1,3 +1,4 @@
+import api ,{ts,apikey,hash} from "../../services/api";
 import { 
     FETCH_USER,
     LOGIN_USER,
@@ -9,20 +10,27 @@ export const userInfo=(users)=>{
     return{
         type:FETCH_USER,
         payload:users,
-        isLogin:false
+      
     }
 }
 
-export const userLogin=(isLogin)=>{
-  
+export const userLogin=(useremail,isLogin)=>{
+    const login={
+        useremail,
+        isLogin
+    }
     return{
         type:LOGIN_USER,
-        payload:isLogin
+        payload:login
     }
 }
 export const userLogOut=(isLogin)=>{
+    const logout={
+        useremail:"",
+        isLogin
+    }
     return {
         type:LOG_OUT_USER,
-        payload :isLogin
+        payload :logout
     }
 }
