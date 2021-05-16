@@ -10,6 +10,7 @@ export const userReducer=(state=initialState,action)=>{
             return {
                 ...state,
                 users:action.payload,
+                login:{isLogin:false}
             }
   
        

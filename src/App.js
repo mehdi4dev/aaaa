@@ -1,16 +1,17 @@
 import './App.css';
 import {Switch,Route,BrowserRouter} from "react-router-dom"
-import {userInfo} from "./store/actions/users"
-import info from "./json/users.json"
+
 import {useDispatch} from "react-redux"
 import SignIn from "./pages/signin"
-import Favorite from "./pages/favoriteheroes"
+import Hero from "./component/heroCard"
+import HeroComics from "./pages/heroComics"
 import { useEffect } from 'react';
+import {usersInfo} from "./store/actions/users"
+import info from "./json/users.json"
 function App() {
-
   const dispatch=useDispatch();
   useEffect(()=>{
-    dispatch(userInfo(info))
+    dispatch(usersInfo(info))
   },[])
    
   return (
@@ -18,7 +19,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={SignIn} />
-        <Route path="/favorite"    component={Favorite} />
+        <Route path="/mehdi"  component={Hero} />
+        <Route path="/heroComics"    component={HeroComics} />
       </Switch>
     </BrowserRouter>
     
