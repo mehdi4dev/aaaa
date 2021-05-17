@@ -16,7 +16,6 @@ export const fetchHeroComics = (heroid) => {
         })
 
         dispatch(setComics(data))
-        dispatch(setLoading(false))
 
 
     }
@@ -34,7 +33,6 @@ export const fetchHero = (heroid) => {
         let data = apiData.data.data.results
 
         dispatch(setHero(data))
-        dispatch(setLoading(false))
 
 
     }

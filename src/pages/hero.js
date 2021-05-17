@@ -1,3 +1,4 @@
+import React from "react"
 import { makeStyles } from "@material-ui/core"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -19,7 +20,7 @@ function Hero() {
   const loading = useSelector(state => state.hero.loading)
   const dispatch = useDispatch()
   const history = useHistory();
-  useEffect(() => {
+  useEffect(async () => {
     if (userlogin.isLogin !== true) {
 
       alert("first you must login")
@@ -32,38 +33,40 @@ function Hero() {
       for (let item of user) {
 
         if (item.email === userlogin.useremail) {
-          dispatch(fetchHero(item.heroId))
-          // dispatch(fetchHeroComics(item.heroId))
+
           dispatch(setLoading(true))
+          await dispatch(fetchHero(item.heroId))
+          await dispatch(fetchHeroComics(item.heroId))
+          dispatch(setLoading(false))
+          break;
         }
       }
     }
 
   }, [])
+
+
+  console.log(loading);
+  if (loading) {
+
+    return (
+
+      <div className={classes.loading}>
+        <LinearProgress />
+        <LinearProgress color="secondary" />
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {
-        !userlogin.islogin &&
-        loading &&
-        <div className={classes.loading}>
-          <LinearProgress />
-          <LinearProgress color="secondary" />
-        </div>
 
-      }
-      {
-        !userlogin.islogin &&
-        !loading &&
+    <React.Fragment >
 
-        <Navbar hero={hero} />
-      }
-      {
-        !userlogin.islogin &&
-        !loading &&
-        <HeroCard hero={hero} />
+      <Navbar hero={hero} />
+      <HeroCard hero={hero} />
 
-      }
-    </div>
+    </React.Fragment>
   );
+
 }
 export default Hero

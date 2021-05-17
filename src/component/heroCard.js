@@ -50,9 +50,7 @@ const useStyles = makeStyles((theme) => ({
         }
 
     },
-    cardContent: {
-        flexGrow: 1,
-    },
+ 
 
 }))
 
@@ -68,8 +66,8 @@ export default function HeroCard({ hero }) {
         for (let item of user) {
 
             if (item.email === userlogin.useremail) {
-                // dispatch(setLoading(true))
-                dispatch(fetchHeroComics(item.heroId))
+                // await dispatch(setLoading(true))
+                //  dispatch(fetchHeroComics(item.heroId))
             }
         }
     }, [])
@@ -87,7 +85,7 @@ export default function HeroCard({ hero }) {
 
                 if (item.email === userlogin.useremail) {
 
-                    dispatch(setLoading(true))
+                    // dispatch(setLoading(true))
                     history.push("/heroComics");
 
                 }
@@ -121,10 +119,8 @@ export default function HeroCard({ hero }) {
                                         <ListOfComics key={comic.id} comics={comic} />
                                     </List>
                                 ))}
-                                <CardContent className={classes.cardContent}>
 
-                                </CardContent>
-                                <CardActions>
+                                <CardActions >
                                     <Button
                                         size="large"
                                         fullWidth
@@ -132,11 +128,12 @@ export default function HeroCard({ hero }) {
                                         variant="contained"
                                         onClick={handleClick}
                                         endIcon={<DoubleArrowIcon />}
+                                        
                                     >
 
                                         More
                                     </Button>
-
+                                    
                                 </CardActions>
                             </Card>
                         }

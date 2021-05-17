@@ -12,11 +12,13 @@ export const heroReducer = (state = initialState, action) => {
                 ...state,
                 comics: action.payload
 
+
             }
         case SET_HERO:
             return {
                 ...state,
                 hero: action.payload
+
 
             }
 

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%', 
         marginTop: theme.spacing(1),
         
     },
@@ -59,20 +59,21 @@ const useStyles = makeStyles((theme) => ({
   const users=useSelector(state=>state.users.users)
   
   const dispatch=useDispatch();
-
-
-  const handleSubmit=(e)=>{
+  
+  
+  const handleSubmit= (e)=>{
     e.preventDefault()
+    let result=false 
     for(let item of users){
-
       if(item.email===userName && item.password==password)
-      {
-          dispatch(userLogin(item.email,item.name,true))
-          
+      { 
+           result=true
+          dispatch(userLogin(item.email,item.name,true)) 
           history.push("/hero");
       }
-      
     }
+    if(!result)
+    alert("invalid Username and password")
     
   }
   const handleChange=(e)=>{
@@ -81,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     if(e.target.name==="password" )
         setPassword(e.target.value)
   }
-
+  
   return (
      <div className={classes.root}>
        
@@ -125,6 +126,8 @@ const useStyles = makeStyles((theme) => ({
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
             />
+           
+          
           <Button
             type="submit"
             fullWidth

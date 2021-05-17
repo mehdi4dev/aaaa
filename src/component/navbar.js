@@ -49,7 +49,7 @@ export default function Navbar({ hero }) {
     };
 
     return (
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" color="secondary" >
             <Toolbar variant="regular">
 
                 <Typography variant="h3" className={classes.title}>

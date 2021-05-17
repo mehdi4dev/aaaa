@@ -42,10 +42,7 @@ export default function ListOfComics({ comics }) {
     }
     return (
         <div>
-            {console.log(loading)}
             <form onClick={handleSubmit} className={classes.root}>
-
-
                 <ListItem alignItems="flex-start" >
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src={`${comics.images[0].path}.jpg`} />
@@ -68,7 +65,6 @@ export default function ListOfComics({ comics }) {
                            
                                 </Typography>
 
-                                {console.log(comics)}
                             </React.Fragment>
                         }
                     />
