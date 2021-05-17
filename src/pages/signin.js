@@ -22,7 +22,7 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
     root:{
          height: 900, 
-        backgroundImage:'url(/MARVEL.jpg)',
+        backgroundImage:'url(/marvel-characters.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -71,9 +71,9 @@ const useStyles = makeStyles((theme) => ({
 
       if(item.email===userName && item.password==password)
       {
-          dispatch(userLogin(item.email,true))
-          dispatch(setLoading(true))
-          history.push("/heroComics");
+          dispatch(userLogin(item.email,item.name,true))
+          // dispatch(setLoading(true))
+          history.push("/hero");
       }
       
     }

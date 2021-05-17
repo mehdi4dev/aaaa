@@ -6,8 +6,8 @@ import {
     import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {userLogOut} from "../store/actions/users"
-import {fetchHeroComics } from "../store/actions/hero";
-import LinearProgress from '@material-ui/core/LinearProgress';
+
+
 import Navbar from '../component/navbar';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme) => ({
 
 function   HeroComics  () {
 const classes = useStyles();
-// const [anchorEl, setAnchorEl] = useState(null);
+
 const history = useHistory();
 const dispatch=useDispatch()
 const userlogin=useSelector(state=>state.users.login)
-const user=useSelector(state=>state.users.users)
-const comics=useSelector(state=>state.hero.data)
-const loading=useSelector(state=>state.hero.loading)
+const hero=useSelector(state=>state.hero.hero)
+const comics=useSelector(state=>state.hero.comics)
+
 
   useEffect(()=>{
             if(userlogin.isLogin !== true){
@@ -46,53 +46,18 @@ const loading=useSelector(state=>state.hero.loading)
               history.push("/")
               
             }
-   else{
-
-     
-     for(let item of user){
-       
-       if(item.email===userlogin.useremail){
-         dispatch(fetchHeroComics(item.heroId))
-         
-        }
-      }
-    }
+ 
      
           },[])
 
-// const handleClick = (event) => {
-// setAnchorEl(event.currentTarget);
-// };
-// const handleLogout = () => {
-//   dispatch(userLogOut(false))
-//   history.push("/")
-// };
 
-// const handleClose = () => {
-//   setAnchorEl(null);
- 
-// };
 
   return (
     <div className={classes.root}>
      
-      <Navbar />
-      {
-      !userlogin.islogin && 
-      loading && 
-      <div className={classes.loading}>
-        <LinearProgress />
-        <LinearProgress color="secondary" />
-    </div>
-    
-      }
-    {
-      !userlogin.islogin &&
-      !loading &&
+        <Navbar  hero={hero} />
         <ComicsList comics={comics} />
-    }
-    
-            
+       
       </div>
   
     

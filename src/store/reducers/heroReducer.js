@@ -1,7 +1,8 @@
-import { SET_COMICS,SET_LOADING } from "../const/const";
+import { SET_COMICS,SET_LOADING,SET_HERO } from "../const/const";
 
 const initialState={
-    data:[],
+    comics:[],
+    hero:{},
     loading:true
 }    
 export const heroReducer=(state=initialState,action)=>{
@@ -9,9 +10,16 @@ export const heroReducer=(state=initialState,action)=>{
         case SET_COMICS:
            return{
                ...state,
-               data:action.payload
+               comics:action.payload
                
            }
+        case SET_HERO:
+           return{
+               ...state,
+               hero:action.payload
+               
+           }
+        
         case SET_LOADING:
             return{
                 ...state,

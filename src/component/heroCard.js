@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {CardActions,
         makeStyles,
         Button,
@@ -10,8 +10,11 @@ import {CardActions,
         List,
     } from "@material-ui/core"
 import ListOfComics from "./list"
-import Navbar from "./navbar"
+import {fetchHeroComics } from "../store/actions/hero";
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+import { useDispatch, useSelector } from "react-redux";
+import {setLoading} from "../store/actions/hero"
+import { useHistory } from "react-router";
 
 const useStyles=makeStyles((theme)=>({
     container:{
@@ -32,37 +35,70 @@ const useStyles=makeStyles((theme)=>({
       },
       
 }))
-const list=[1,2,3,4,5]
-export default function Hero(){
+
+export default function HeroCard({hero}){
     const classes=useStyles()
+    const user=useSelector(state=>state.users.users)
+    const userlogin=useSelector(state=>state.users.login)
+    const comics=useSelector(state=>state.hero.comics)
+    const loading=useSelector(state=>state.hero.loading)
+    const history=useHistory()
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        for(let item of user){
+        
+            if(item.email===userlogin.useremail){
+                // dispatch(setLoading(true))
+                dispatch(fetchHeroComics(item.heroId))
+    }}
+    },[])
 
     const handleClick=(e)=>{
-        // window.open(`https://www.marvel.com/comics/issue/${comic.id}/${comic.title}`, "_blank")
- 
+        if(userlogin.isLogin !== true){
+
+            alert("first you must login")
+            history.push("/")
+            
+          }
+         else{
+  
+        for(let item of user){
+   
+            if(item.email===userlogin.useremail){
+            
+            dispatch(setLoading(true))
+            history.push("/heroComics");
+            
+    }
+}
+  }
     }
 
 return(  
     <div>
-    <Navbar/>
+    
     <Container className={classes.container} maxWidth="lg">
 
             <Grid container  direction="row" maxWidth="lg" >
                 <Grid item xs>
-                        <Card className={classes.card}  onClick={handleClick}>
+                        <Card className={classes.card}  >
                                 <CardMedia
                                 className={classes.cardMedia}
-            
-                                image={"/logo192.png"}
+                                
+                                image={`${hero[0].thumbnail.path}.jpg`}
                                 title="Image title"
                                 />
-                            
+                            {/* {console.log(hero[0].thumbnail.path)  } */}
                             </Card>
                 </Grid>
                 <Grid item xs>
-                            <Card className={classes.card}  onClick={handleClick}>
-                                {list.map(item=>(
+                    {console.log(loading)}
+                
+                    {!loading &&  
+                            <Card className={classes.card}  >
+                                {comics.filter((comic, idx) => idx < 6).map((comic)=>(
                                     <List className={classes.list}>
-                                        <ListOfComics key={item.key} />
+                                        <ListOfComics key={comic.id} comics={comic} />
                                     </List>
                                 ))}
                                     <CardContent className={classes.cardContent}>
@@ -74,16 +110,16 @@ return(
                                     fullWidth 
                                     color="primary"
                                     variant="contained"
-                                    // href={`https://www.marvel.com/comics/issue/${hero.id}/${hero.title}`}
-                                    // target="_blank"
-                                        endIcon={<DoubleArrowIcon />}
+                                    onClick={handleClick}
+                                    endIcon={<DoubleArrowIcon />}
                                     >
                                     
-                                        Hero's comics
+                                        More
                                     </Button>
                                     
                                     </CardActions>
                                 </Card>
+                                    }
                 </Grid>
             </Grid>
 

@@ -10,8 +10,10 @@ import {Container,
         Toolbar,
         AppBar,
 } from "@material-ui/core"
-
-const useStyles=makeStyles((theme)=>({
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import {userLogOut} from "../store/actions/users"
+const useStyles=makeStyles((theme)=> ({
     title: {
         flexGrow: 1,
       },
@@ -25,19 +27,20 @@ const useStyles=makeStyles((theme)=>({
 }))
 
 
-export default function Navbar(){
+export default function Navbar({hero}){
     const classes=useStyles()
     const [anchorEl, setAnchorEl] = useState(null);
-
-
+    const userlogin=useSelector(state=>state.users.login)
+    const dispatch=useDispatch();
+    const history = useHistory();
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         };
 
 
         const handleLogout = () => {
-        //   dispatch(userLogOut(false))
-        //   history.push("/")
+          dispatch(userLogOut(false))
+          history.push("/")
         };
         
         const handleClose = () => {
@@ -46,17 +49,17 @@ export default function Navbar(){
         };
 
     return(
-        <AppBar position="static" >
+        <AppBar position="static" color="secondary">
             <Toolbar variant="regular">
             
-            <Typography variant="h4" className={classes.title}>
-            Marvel Heroes
+            <Typography variant="h3" className={classes.title}>
+            MARVEL HEROS
             </Typography>
             
             <IconButton
             onClick={handleClick}
             >
-            <Avatar src="/lizard.jpg" className={classes.largeavatar} />
+            <Avatar src={`${hero[0].thumbnail.path}.jpg`} className={classes.largeavatar} />
             </IconButton>
             
             <Menu
@@ -67,7 +70,7 @@ export default function Navbar(){
             className={classes.Menu}
             onClose={handleClose}
             >
-            {/* <MenuItem  >{userlogin.useremail}</MenuItem> */}
+            <MenuItem  >{userlogin.username}</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
             
