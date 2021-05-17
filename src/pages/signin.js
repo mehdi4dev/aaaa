@@ -1,4 +1,4 @@
-import React, {  useState,useEffect  } from 'react';
+import React, {  useState } from 'react';
 import {Avatar,
         Button,
         CssBaseline,
@@ -13,9 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import {useDispatch, useSelector } from 'react-redux';
 import {userLogin} from "../store/actions/users"
-// import {userInfo} from "../store/actions/users"
-import {setLoading} from "../store/actions/hero"
-// import info from "../json/users.json"
+
 import { useHistory } from "react-router-dom";
 
 
@@ -61,9 +59,7 @@ const useStyles = makeStyles((theme) => ({
   const users=useSelector(state=>state.users.users)
   
   const dispatch=useDispatch();
-  // useEffect(()=>{
-  //   dispatch(userInfo(info))
-  // },[])
+
 
   const handleSubmit=(e)=>{
     e.preventDefault()
@@ -72,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
       if(item.email===userName && item.password==password)
       {
           dispatch(userLogin(item.email,item.name,true))
-          // dispatch(setLoading(true))
+          
           history.push("/hero");
       }
       
