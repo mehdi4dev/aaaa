@@ -27,7 +27,7 @@ function Hero() {
       history.push("/")
 
     }
-    else {
+    
       for (let item of user) {
 
         if (item.email === userlogin.useremail) {
@@ -41,7 +41,7 @@ function Hero() {
           break;
         }
       }
-    }
+   
 
   }, [])
 
