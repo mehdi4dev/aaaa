@@ -20,28 +20,26 @@ function Hero() {
   const loading = useSelector(state => state.hero.loading)
   const dispatch = useDispatch()
   const history = useHistory();
-  useEffect(() => {
+  useEffect(async () => {
     if (userlogin.isLogin !== true) {
 
       alert("first you must login")
       history.push("/")
 
     }
-    
+    else {
       for (let item of user) {
 
         if (item.email === userlogin.useremail) {
-          dispatch(setLoading(true));
-          Promise.all([
-            dispatch(fetchHero(item.heroId)),
-            dispatch(fetchHeroComics(item.heroId))
-          ]).then(() =>
+            dispatch(setLoading(true))
+            await dispatch(fetchHero(item.heroId))
+            await dispatch(fetchHeroComics(item.heroId))
             dispatch(setLoading(false))
-          )
+         
           break;
         }
       }
-   
+    }
 
   }, [])
 
