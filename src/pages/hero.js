@@ -35,7 +35,6 @@ function Hero() {
             await dispatch(fetchHero(item.heroId))
             await dispatch(fetchHeroComics(item.heroId))
             dispatch(setLoading(false))
-         
           break;
         }
       }
