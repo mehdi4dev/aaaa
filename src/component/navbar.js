@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     largeavatar: {
         width: theme.spacing(10),
         height: theme.spacing(10),
-        '&:hover':{
-            cursur:"pointer"
+        '&:hover': {
+            cursur: "pointer"
         }
     },
 }))

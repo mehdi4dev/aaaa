@@ -47,12 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cardList: {
         height: 600,
-        // [theme.breakpoints.down(1000)]: {
-        //     width: 600,
-        // },
-        // [theme.breakpoints.down(500)]: {
-        //     width: 100,
-        // },
+        
     },
     cardMedia: {
         paddingTop: '100%', // 16:9
