@@ -17,18 +17,18 @@ const useStyles = makeStyles((theme) => ({
             cursor: "pointer"
         }
     },
-    Box:{
-        width: 500, 
+    Box: {
+        width: 500,
         whiteSpace: 'nowrap',
         [theme.breakpoints.down(1300)]: {
             width: 350,
-          },
+        },
         [theme.breakpoints.down(1100)]: {
             width: 250,
-          },
-          [theme.breakpoints.down(1000)]: {
+        },
+        [theme.breakpoints.down(1000)]: {
             width: 500,
-          }
+        }
     },
     inline: {
         display: 'inline',
@@ -57,12 +57,12 @@ export default function ListOfComics({ comics }) {
                                     className={classes.inline}
                                     color="textPrimary"
                                 >
-                                    
+
                                     <Box component="div" className={classes.Box} textOverflow="ellipsis" overflow="hidden" bgcolor="background.paper">
 
                                         {comics.description}
                                     </Box>
-                           
+
                                 </Typography>
 
                             </React.Fragment>

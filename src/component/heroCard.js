@@ -11,10 +11,8 @@ import {
     List,
 } from "@material-ui/core"
 import ListOfComics from "./list"
-import { fetchHeroComics } from "../store/actions/hero";
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../store/actions/hero"
 import { useHistory } from "react-router";
 
 
@@ -32,15 +30,29 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         width: 600,
-               
-  
-
-    },
-    cardList:{
-        height:600,
         [theme.breakpoints.down(1000)]: {
             width: 600,
-          },
+        },
+        [theme.breakpoints.down(700 )]: {
+            width: 450,
+        },
+        [theme.breakpoints.down(500)]: {
+            width: 340,
+        },
+        [theme.breakpoints.down(500)]: {
+            width: 250,
+        },
+       
+
+    },
+    cardList: {
+        height: 600,
+        // [theme.breakpoints.down(1000)]: {
+        //     width: 600,
+        // },
+        // [theme.breakpoints.down(500)]: {
+        //     width: 100,
+        // },
     },
     cardMedia: {
         paddingTop: '100%', // 16:9
@@ -50,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         }
 
     },
- 
+
 
 }))
 
@@ -61,16 +73,6 @@ export default function HeroCard({ hero }) {
     const comics = useSelector(state => state.hero.comics)
     const loading = useSelector(state => state.hero.loading)
     const history = useHistory()
-    const dispatch = useDispatch()
-    useEffect(() => {
-        for (let item of user) {
-
-            if (item.email === userlogin.useremail) {
-                // await dispatch(setLoading(true))
-                //  dispatch(fetchHeroComics(item.heroId))
-            }
-        }
-    }, [])
 
     const handleClick = (e) => {
         if (userlogin.isLogin !== true) {
@@ -85,7 +87,6 @@ export default function HeroCard({ hero }) {
 
                 if (item.email === userlogin.useremail) {
 
-                    // dispatch(setLoading(true))
                     history.push("/heroComics");
 
                 }
@@ -113,7 +114,7 @@ export default function HeroCard({ hero }) {
 
 
                         {!loading &&
-                            <Card   className={classes.cardList}>
+                            <Card className={classes.cardList}>
                                 {comics.filter((comic, index) => index < 6).map((comic) => (
                                     <List className={classes.list}>
                                         <ListOfComics key={comic.id} comics={comic} />
@@ -128,12 +129,12 @@ export default function HeroCard({ hero }) {
                                         variant="contained"
                                         onClick={handleClick}
                                         endIcon={<DoubleArrowIcon />}
-                                        
+
                                     >
 
                                         More
                                     </Button>
-                                    
+
                                 </CardActions>
                             </Card>
                         }
