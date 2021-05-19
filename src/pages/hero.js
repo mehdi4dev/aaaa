@@ -32,8 +32,8 @@ function Hero() {
 
         if (item.email === userlogin.useremail) {
             dispatch(setLoading(true))
-            await dispatch(fetchHero(item.heroId))
-            await dispatch(fetchHeroComics(item.heroId))
+             dispatch(fetchHero(item.heroId))
+             dispatch(fetchHeroComics(item.heroId))
             dispatch(setLoading(false))
           break;
         }
